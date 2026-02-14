@@ -10,7 +10,8 @@ body {
     font-family: 'Inter', sans-serif;
     background: #000;
     color: white;
-    overflow: hidden;
+   overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* ===== CONTENEDOR GENERAL ===== */
@@ -293,4 +294,5 @@ button:hover {
         filter: blur(0);
     }
 }
+
 
