@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>Sorpresa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexTrade</title>
-    <link rel="stylesheet" href="./Styles/IndexStyle.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="nav">
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Mensajeria</a></li>
-        </ul>
 
-    </div>
-    <div class="Content">
+    <!-- INTRO -->
+    <section class="intro">
+        <div class="intro-content">
+            <h1>Esto no es solo una página...</h1>
+            <p>Es algo que hice pensando en ti.</p>
+            <button id="enterBtn">Entrar</button>
+        </div>
+    </section>
 
+    <!-- SECCIÓN 1 - VIBRA NOSTÁLGICA -->
+    <section class="milo-section hidden">
+        <div class="text-box">
+            <h2>A veces no sé explicarlo...</h2>
+            <p>Pero contigo todo se siente diferente.</p>
+        </div>
+    </section>
 
-    </div>
-    
-    
+    <!-- SECCIÓN 2 - TIERNA (SNOOPY) -->
+    <section class="soft-section hidden">
+        <div class="text-box">
+            <h2>Me haces sentir en casa</h2>
+            <p>Como si todo estuviera bien cuando estás cerca.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3 - TULIPANES -->
+    <section class="flowers-section hidden">
+        <div class="text-box">
+            <h2>Si fueras una flor...</h2>
+            <p>Serías tulipanes floreciendo en invierno.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4 - GALERÍA -->
+    <section class="gallery-section hidden">
+        <h2>Nuestros momentos</h2>
+        <div class="gallery">
+            <!-- Aquí irán las 20 fotos -->
+            <div class="photo"></div>
+            <div class="photo"></div>
+            <div class="photo"></div>
+            <div class="photo"></div>
+        </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final-section hidden">
+        <h2>Hay algo más...</h2>
+        <button id="playMusic">Escúchalo</button>
+        <audio id="audioPlayer" src="audio.mp3"></audio>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
