@@ -1,0 +1,296 @@
+/* ===== RESET ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: white;
+    overflow: hidden;
+}
+
+/* ===== CONTENEDOR GENERAL ===== */
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* ===== SLIDES BASE ===== */
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Estado inicial */
+.slide {
+    transform: translateY(100vh);
+}
+
+.slide:first-child {
+    transform: translateY(0);
+}
+
+/* ===== CONTENIDO ===== */
+
+.content {
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    margin-bottom: 15px;
+}
+
+p {
+    font-weight: 300;
+    opacity: 0.85;
+    font-size: 1.2rem;
+}
+
+/* ===== BOTONES ===== */
+
+button {
+    padding: 12px 35px;
+    border-radius: 40px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+button:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.08);
+}
+
+/* ===== FONDOS ===== */
+
+/* IMPORTANTE:
+   Asegúrate que la carpeta se llame EXACTAMENTE "IMAGENES"
+   y esté al mismo nivel que index.html
+*/
+
+/* INTRO */
+.intro {
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+        url("IMAGENES/star-bg.jpg") center/cover no-repeat;
+}
+
+/* URBANO */
+.bg-milo {
+    background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+        url("IMAGENES/milo-bg.jpg") center/cover no-repeat;
+}
+
+/* DARK */
+.dark {
+    background: linear-gradient(180deg, #1a1a2e, #000000);
+}
+
+/* ESTADÍSTICA */
+.stat {
+    background:
+        radial-gradient(circle at 20% 20%, #ff0055, transparent 40%),
+        radial-gradient(circle at 80% 80%, #6600ff, transparent 40%),
+        #000;
+}
+
+.stat h1 {
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 700;
+}
+
+/* SOFT */
+.soft {
+    background: linear-gradient(180deg, #fdf6e3, #fceabb);
+    color: #222;
+}
+
+/* FLOWERS */
+.flowers {
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)),
+        url("IMAGENES/tulipanes.jpg") center/cover no-repeat;
+}
+
+/* INDIE */
+.indie {
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85)),
+        url("IMAGENES/Kevin.jpg") center/cover no-repeat;
+}
+
+/* BLACKOUT */
+.blackout {
+    background: #000;
+    font-size: 3rem;
+}
+
+/* FINAL */
+.final-message {
+    background:
+        radial-gradient(circle at center, #ff003c, #600018 50%, #000 100%);
+}
+
+/* AUDIO */
+.audio-slide {
+    background:
+        linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+}
+
+/* ===== FOTO SLIDE ===== */
+
+.photo-slide {
+    overflow: hidden;
+    background: black;
+}
+
+.photo-slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+    transition: transform 6s ease;
+}
+
+.photo-slide:hover img {
+    transform: scale(1.08);
+}
+
+.overlay-text {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(2rem, 4vw, 4rem);
+    text-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* ===== GALERÍA ===== */
+
+.gallery-slide {
+    flex-direction: column;
+    background: linear-gradient(180deg, #0f0f0f, #1c1c1c);
+}
+
+.gallery-slide h2 {
+    margin-bottom: 40px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    width: 90%;
+    max-width: 1100px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 18px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.6rem; }
+    .gallery img { height: 120px; }
+
+}
+
+/* ===== LETRA SINCRONIZADA PRO ===== */
+
+.lyrics {
+    margin-top: 60px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    min-height: 120px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* efecto glow romántico */
+    text-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(255, 255, 255, 0.15);
+
+    letter-spacing: 1px;
+}
+
+/* cuando aparece */
+.lyrics.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* animación cuando cambia de línea */
+.lyrics.animate {
+    animation: lyricFade 0.8s ease forwards;
+}
+
+@keyframes lyricFade {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+        filter: blur(4px);
+    }
+    50% {
+        opacity: 0.6;
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
