@@ -37,14 +37,10 @@ body {
     background-repeat: no-repeat;
 }
 
-/* Estado inicial */
-.slide {
-    transform: translateY(100vh);
+html {
+    scroll-behavior: smooth;
 }
 
-.slide:first-child {
-    transform: translateY(0);
-}
 
 /* ===== CONTENIDO ===== */
 
@@ -292,6 +288,7 @@ button:hover {
         filter: blur(0);
     }
 }
+
 
 
 
