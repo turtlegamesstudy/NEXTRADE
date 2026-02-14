@@ -17,15 +17,13 @@ body {
 /* ===== CONTENEDOR GENERAL ===== */
 
 .slides {
-    position: relative;
     width: 100%;
-    height: 100vh;
 }
 
 /* ===== SLIDES BASE ===== */
 
 .slide {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -294,5 +292,6 @@ button:hover {
         filter: blur(0);
     }
 }
+
 
 
