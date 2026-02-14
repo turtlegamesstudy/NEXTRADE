@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (daysCounter) {
 
         // CAMBIA ESTA FECHA
-        const startDate = new Date("2025-01-01");
+        const startDate = new Date("2025-10-14");
         const today = new Date();
 
         const diffTime = today - startDate;
@@ -177,4 +177,5 @@ audio.addEventListener("timeupdate", () => {
         currentLine++;
     }
 });
+
 
