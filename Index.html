@@ -2,153 +2,154 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sorpresa</title>
+    <title>Mis Regalos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="slides">
+    <main class="main-gallery">
+        <header class="gallery-header">
+            <h1>Para Ti</h1>
+            <p>Hecho con ❤️ el 13/02/2026</p>
+        </header>
 
-        <!-- 1 INTRO -->
-        <section class="slide intro">
-            <div class="content">
-                <h1>Sorpresa Paletita</h1>
-                <p>¿Estás lista?</p>
-                <button id="startExperience">Comenzar</button>
+        <div class="gift-grid">
+            <div class="gift-card" id="openSorpresa">
+                <div class="card-background" style="background-image: url('IMAGENES/Ella1.jpg');"></div>
+                <div class="card-content">
+                    <h2>Sorpresa Paletita</h2>
+                    <p>Nuestra historia</p>
+                </div>
             </div>
-        </section>
 
-        <!-- 2 -->
-        <section class="slide dark bg-milo">
-            <div class="overlay"></div>
-            <div class="content">
-                <h2>En 2025 conocí a alguien...</h2>
+            <div class="gift-card locked">
+                <div class="card-content">
+                    <h2>Carta Especial</h2>
+                    <p>Próximamente...</p>
+                </div>
             </div>
-        </section>
 
-        <!-- 3 FOTO GRANDE -->
-        <section class="slide photo-slide">
-            <img src="IMAGENES/Ella1.jpg" alt="Ella">
-            <h2 class="overlay-text">Y cambió todo.</h2>
-        </section>
-
-        <!-- 4 MILO VIBE -->
-        <section class="slide dark">
-            <div class="content">
-                <h2>Tu vibra sería una canción de</h2>
-                <h1>Milo J</h1>
-                <p>Profunda. Real. Diferente.</p>
+            <div class="gift-card locked">
+                <div class="card-content">
+                    <h2>Playlist</h2>
+                    <p>Canciones que me recuerdan a ti</p>
+                </div>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <!-- 5 ESTADÍSTICA -->
-        <section class="slide stat">
-            <div class="content">
-                <h1>9,999+</h1>
-                <p>Veces que pensé en ti</p>
-            </div>
-        </section>
+    <div id="sorpresaModal" class="modal-overlay">
+        <button class="close-modal">&times;</button>
+        
+        <div class="slides">
+            <section class="slide intro">
+                <div class="content">
+                    <h1>Sorpresa Paletita</h1>
+                    <p>¿Estás lista?</p>
+                    <button id="startExperience">Comenzar</button>
+                </div>
+            </section>
 
-        <!-- 6 SNOOPY TIERNO -->
-        <section class="slide soft">
-            <div class="content">
-                <h2>Contigo me siento en casa</h2>
-                <p>Como Snoopy cuando encuentra su lugar favorito.</p>
-            </div>
-        </section>
+            <section class="slide dark bg-milo">
+                <div class="overlay"></div>
+                <div class="content">
+                    <h2>En 2025 conocí a alguien...</h2>
+                </div>
+            </section>
 
-        <!-- 7 TULIPANES -->
-        <section class="slide flowers">
-            <div class="content">
-                <h2>Si fueras una flor...</h2>
-                <h1>Serías tulipanes.</h1>
-            </div>
-        </section>
+            <section class="slide photo-slide">
+                <img src="IMAGENES/Ella1.jpg" alt="Ella">
+                <h2 class="overlay-text">Y cambió todo.</h2>
+            </section>
 
-        <!-- 8 FOTO JUNTOS -->
-        <section class="slide photo-slide">
-            <img src="IMAGENES/Ella.jpg" alt="Momento juntos">
-            <h2 class="overlay-text">Nuestro momento favorito.</h2>
-        </section>
+            <section class="slide dark">
+                <div class="content">
+                    <h2>Tu vibra sería una canción de</h2>
+                    <h1>Milo J</h1>
+                    <p>Profunda. Real. Diferente.</p>
+                </div>
+            </section>
 
-        <!-- 9 CONTADOR -->
-        <section class="slide stat">
-            <div class="content">
-                <h1 id="daysCounter">0</h1>
-                <p>Días desde que te conocí</p>
-            </div>
-        </section>
+            <section class="slide stat">
+                <div class="content">
+                    <h1>9,999+</h1>
+                    <p>Veces que pensé en ti</p>
+                </div>
+            </section>
 
-        <!-- 10 GALERÍA -->
-        <section class="slide gallery-slide">
-            <h2>Nuestros recuerdos</h2>
-            <div class="gallery">
-                <img src="IMAGENES/f1.jpeg" alt="Recuerdo 1">
-                <img src="IMAGENES/f2.jpeg" alt="Recuerdo 2">
-                <img src="IMAGENES/f3.jpeg" alt="Recuerdo 3">
-                <img src="IMAGENES/f4.jpeg" alt="Recuerdo 4">
-                <img src="IMAGENES/f5.jpeg" alt="Recuerdo 5">
-                <img src="IMAGENES/f6.jpeg" alt="Recuerdo 6">
-                <img src="IMAGENES/f7.jpeg" alt="Recuerdo 7">
-                <img src="IMAGENES/f8.jpeg" alt="Recuerdo 8">
-                <img src="IMAGENES/f9.jpeg" alt="Recuerdo 9">
-                <img src="IMAGENES/f10.jpeg" alt="Recuerdo 10">
-                <img src="IMAGENES/f11.jpeg" alt="Recuerdo 11">
-                <img src="IMAGENES/f12.jpeg" alt="Recuerdo 12">
-                <img src="IMAGENES/f13.jpeg" alt="Recuerdo 13">
-                <img src="IMAGENES/f14.jpeg" alt="Recuerdo 14">
-                <img src="IMAGENES/f15.jpeg" alt="Recuerdo 15">
-            </div>
-        </section>
+            <section class="slide soft">
+                <div class="content">
+                    <h2>Contigo me siento en casa</h2>
+                    <p>Como Snoopy cuando encuentra su lugar favorito.</p>
+                </div>
+            </section>
 
-        <!-- 11 INDIE VIBE -->
-        <section class="slide indie">
-            <div class="content">
-                <h2>Si esto fuera una canción sería de</h2>
-                <h1>Kevin Kaarl</h1>
-                <p>Suave. Sincera. Eterna.</p>
-            </div>
-        </section>
+            <section class="slide flowers">
+                <div class="content">
+                    <h2>Si fueras una flor...</h2>
+                    <h1>Serías tulipanes.</h1>
+                </div>
+            </section>
 
-        <!-- 12 MENSAJE -->
-        <section class="slide dark">
-            <div class="content">
-                <h2>No sé qué somos exactamente...</h2>
-                <p>Pero sí sé que quiero seguir descubriéndolo contigo.</p>
-            </div>
-        </section>
+            <section class="slide photo-slide">
+                <img src="IMAGENES/Ella.jpg" alt="Momento juntos">
+                <h2 class="overlay-text">Nuestro momento favorito.</h2>
+            </section>
 
-        <!-- 13 SILENCIO -->
-        <section class="slide blackout">
-            <h1>...</h1>
-        </section>
+            <section class="slide stat">
+                <div class="content">
+                    <h1 id="daysCounter">0</h1>
+                    <p>Días desde que te conocí</p>
+                </div>
+            </section>
 
-        <!-- 14 CONFESIÓN -->
-        <section class="slide final-message">
-            <div class="content">
-                <h1>Me gustas.</h1>
-                <p>Y no poco.</p>
-            </div>
-        </section>
+            <section class="slide gallery-slide">
+                <h2>Nuestros recuerdos</h2>
+                <div class="gallery">
+                    <img src="IMAGENES/f1.jpeg" alt="1"><img src="IMAGENES/f2.jpeg" alt="2">
+                    <img src="IMAGENES/f3.jpeg" alt="3"><img src="IMAGENES/f4.jpeg" alt="4">
+                    <img src="IMAGENES/f5.jpeg" alt="5"><img src="IMAGENES/f6.jpeg" alt="6">
+                    <img src="IMAGENES/f7.jpeg" alt="7"><img src="IMAGENES/f8.jpeg" alt="8">
+                </div>
+            </section>
 
-        <!-- 15 AUDIO -->
-<section class="slide audio-slide">
-    <div class="content">
-        <h2>Escucha esto cuando estés lista</h2>
-        <button id="playAudio">Reproducir</button>
+            <section class="slide indie">
+                <div class="content">
+                    <h2>Si esto fuera una canción sería de</h2>
+                    <h1>Kevin Kaarl</h1>
+                    <p>Suave. Sincera. Eterna.</p>
+                </div>
+            </section>
 
-        <div id="lyrics" class="lyrics"></div>
+            <section class="slide dark">
+                <div class="content">
+                    <h2>No sé qué somos exactamente...</h2>
+                    <p>Pero sí sé que quiero seguir descubriéndolo contigo.</p>
+                </div>
+            </section>
 
-        <audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
-    </div>
-</section>
+            <section class="slide blackout">
+                <h1>...</h1>
+            </section>
 
+            <section class="slide final-message">
+                <div class="content">
+                    <h1>Me gustas.</h1>
+                    <p>Y no poco.</p>
+                </div>
+            </section>
 
+            <section class="slide audio-slide">
+                <div class="content">
+                    <h2>Escucha esto cuando estés lista</h2>
+                    <button id="playAudio">Reproducir</button>
+                    <div id="lyrics" class="lyrics"></div>
+                    <audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script src="script.js"></script>
