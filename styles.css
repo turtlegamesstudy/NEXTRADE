@@ -5,7 +5,10 @@ body {
     font-family: 'Inter', sans-serif;
     background: #0a0a0a;
     color: white;
-    overflow-x: hidden;
+    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la pantalla */
+    overflow-y: auto;  /* Permite scroll vertical explícitamente */
+    overflow-x: hidden; 
+    width: 100%;
 }
 
 /* ===== GRILLA PRINCIPAL ===== */
