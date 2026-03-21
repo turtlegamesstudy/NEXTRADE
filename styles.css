@@ -1,7 +1,5 @@
 /* ===== PANTALLA DE CARGA (LOADER) ===== */
-/* Para que funcione, añade <div id="loader">...</div> en tu HTML o usa este CSS */
-body::before {
-    content: "❤️";
+#loader {
     position: fixed;
     inset: 0;
     background: #0a0a0a;
@@ -9,13 +7,15 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
-    animation: fadeOutLoader 1.5s forwards 1.5s, beat 1.2s infinite;
-    pointer-events: none;
+    transition: opacity 1s ease, visibility 1s;
 }
 
-@keyframes fadeOutLoader {
-    to { opacity: 0; visibility: hidden; }
+.loader-content { text-align: center; }
+
+.heart-loader {
+    font-size: 3rem;
+    animation: beat 1.2s infinite;
+    margin-bottom: 20px;
 }
 
 @keyframes beat {
@@ -45,6 +45,11 @@ body {
     animation: revealText 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+@keyframes revealText {
+    from { opacity: 0; transform: translateY(-20px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
 .gift-card {
     opacity: 0;
     transform: translateY(30px);
@@ -56,11 +61,6 @@ body {
 .gift-grid .gift-card:nth-child(2) { animation-delay: 2.0s; }
 .gift-grid .gift-card:nth-child(3) { animation-delay: 2.2s; }
 
-@keyframes revealText {
-    from { opacity: 0; transform: translateY(-20px); filter: blur(10px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
 @keyframes revealCards {
     to { opacity: 1; transform: translateY(0); }
 }
@@ -69,14 +69,13 @@ body {
 .main-gallery {
     padding: 80px 20px;
     max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 10px;
+    margin: 10px auto 0;
     text-align: center;
 }
 
 .gallery-header p { 
     color: #666; 
-    margin-bottom: 50px; 
+    margin-bottom: 30px; 
     animation: revealText 1.5s ease 0.5s both;
 }
 
@@ -84,6 +83,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    margin-top: 40px;
 }
 
 .gift-card {
@@ -102,6 +102,9 @@ body {
     box-shadow: 0 20px 40px rgba(255, 0, 85, 0.3);
     border-color: rgba(255, 0, 85, 0.4);
 }
+
+.gift-card.locked { opacity: 0.5; cursor: not-allowed; filter: grayscale(1); }
+.gift-card.locked:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.05); }
 
 .card-background {
     position: absolute;
@@ -163,120 +166,127 @@ body {
     justify-content: center;
 }
 
-.close-modal:hover { background: rgba(255, 255, 255, 0.2); transform: rotate(90deg); }
+.close-modal:hover { background: rgba(255, 0, 85, 0.5); transform: rotate(90deg); }
 
 .slides { width: 100%; height: 100vh; overflow: hidden; position: relative; }
 
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    background-size: cover;
+    background-position: center;
+}
+
 /* Animación de entrada de los elementos dentro del slide */
+.slide .content > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s ease;
+}
+
 .slide.active-animation .content > * {
-    animation: slideUpFade 0.8s ease forwards;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@keyframes slideUpFade {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Botones flotantes */
-button { 
-    padding: 15px 40px; 
-    border-radius: 50px; 
-    border: 1px solid rgba(255,255,255,0.2); 
-    background: rgba(255,255,255,0.1); 
-    color: white; 
-    font-weight: 600;
-    letter-spacing: 1px;
-    cursor: pointer; 
-    transition: 0.4s; 
-    backdrop-filter: blur(10px);
-}
-
-button:hover { 
-    background: white; 
-    color: black; 
-    transform: scale(1.1); 
-    box-shadow: 0 10px 20px rgba(255,255,255,0.2);
-}
-
-/* Fondos con Parallax simulado */
-.intro { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url("IMAGENES/star-bg.jpg") center/cover; }
+/* Fondos y Estilos Específicos de Slides */
+.intro { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url("IMAGENES/star-bg.jpg") center/cover; }
+.bg-milo { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url("IMAGENES/milo-bg.jpg") center/cover; }
+.dark { background: linear-gradient(180deg, #1a1a2e, #000); }
+.stat { background: radial-gradient(circle at 20% 20%, #ff0055, transparent 40%), #000; }
+.soft { background: linear-gradient(180deg, #fdf6e3, #fceabb); color: #222; }
 .flowers { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url("IMAGENES/tulipanes.jpg") center/cover; }
+.indie { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.85)), url("IMAGENES/Kevin.jpg") center/cover; }
+.blackout { background: #000; }
 .final-message { background: radial-gradient(circle at center, #ff003c 0%, #000 70%); }
 
-/* Galería de fotos interna */
-.gallery { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-    gap: 15px; 
-    width: 90%; 
-    max-width: 600px;
+/* Fotos en Pantalla Completa */
+.photo-slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
 }
 
-.gallery img { 
-    width: 100%; 
-    height: 150px; 
-    object-fit: cover; 
-    border-radius: 15px; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+.overlay-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-shadow: 0 5px 20px #000;
+}
+
+/* Galería interna */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
     transition: 0.4s;
 }
 
-.gallery img:hover { transform: scale(1.1) rotate(3deg); z-index: 5; }
+.gallery img:hover { transform: scale(1.1); z-index: 10; }
 
-/* Sincronización de Letras */
-.lyrics { 
-    margin-top: 40px; 
-    font-family: 'Playfair Display', serif; 
-    font-size: clamp(1.5rem, 5vw, 2.5rem); 
+/* Música y Letras */
+.lyrics {
+    margin-top: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
     color: #ff0055;
     text-shadow: 0 0 20px rgba(255,0,85,0.5);
+    min-height: 80px;
+    opacity: 0;
+    transition: 0.5s;
 }
 
-/* ===== BOTÓN DE RECARGAR ===== */
+.lyrics.show { opacity: 1; }
+
+/* Botón de Recargar */
 .reload-btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
-    margin-botton: 20px;
+    margin: 20px 0;
     padding: 10px 25px;
-    background: rgba(255, 255, 255, 0.05); /* Fondo traslúcido */
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
-    color: #888;
+    color: #ccc;
     font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: 0.4s;
     backdrop-filter: blur(5px);
-    animation: fadeIn 2s ease forwards; /* Aparece suavemente */
-}
-
-.reload-btn span {
-    font-size: 1.2rem;
-    transition: transform 0.6s ease;
 }
 
 .reload-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     color: white;
-    border-color: var(--primary); /* El rosa/rojo que usamos antes */
+    border-color: #ff0055;
     box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
 }
 
-.reload-btn:hover span {
-    transform: rotate(360deg); /* Gira al pasar el mouse */
-}
+.reload-btn span { transition: 0.6s ease; }
+.reload-btn:hover span { transform: rotate(360deg); }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Ajuste para móviles */
-@media (max-width: 480px) {
-    .reload-btn {
-        padding: 8px 20px;
-        font-size: 0.8rem;
-    }
+/* Adaptabilidad Móvil */
+@media (max-width: 768px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery img { height: 100px; }
 }
