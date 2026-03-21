@@ -92,6 +92,9 @@ opacity:0;
 visibility:hidden;
 transition:.5s;
 z-index:1000;
+
+/* 🔥 CLAVE */
+overflow:hidden;
 }
 
 .modal-overlay.active{
@@ -122,13 +125,18 @@ background:#ff0055;
 transform:rotate(90deg);
 }
 
-/* ===== SLIDES ===== */
+/* ===== SLIDES (ARREGLADO PRO) ===== */
 .slides{
 position:relative;
-overflow-y:auto;
 height:100vh;
-scroll-snap-type:y mandatory;
+overflow-y:auto;
+
+/* 🔥 CAMBIO IMPORTANTE */
+scroll-snap-type:y proximity;
+
+/* 🔥 PARA CELULARES */
 -webkit-overflow-scrolling:touch;
+touch-action:pan-y;
 }
 
 .slide{
@@ -140,6 +148,7 @@ justify-content:center;
 align-items:center;
 padding:40px 20px;
 }
+
 /* ===== TEXT ===== */
 .content{
 max-width:600px;
@@ -192,7 +201,7 @@ animation:pulseBg 3s infinite;
 background:#000;
 }
 
-/* ===== PHOTO SLIDE ===== */
+/* ===== PHOTO ===== */
 .photo-slide img{
 position:absolute;
 inset:0;
@@ -277,161 +286,40 @@ to{transform:scale(1.1)}
 50%{background:radial-gradient(circle,#ff3366 0%,#000 80%)}
 }
 
-/* ===== RESPONSIVE PRO ===== */
+/* ===== RESPONSIVE ===== */
 
-/* 📱 Móviles pequeños */
-@media (max-width: 480px){
+/* 📱 Móvil */
+@media(max-width:768px){
 
-.main-gallery{
-padding:30px 15px;
+.gift-card{height:300px}
+
+.gallery{
+grid-template-columns:repeat(2,1fr);
 }
 
-.gallery-header h1{
-font-size:2rem;
-}
+.content h1{font-size:2rem}
+.content h2{font-size:1.3rem}
 
-.gallery-header p{
-font-size:.9rem;
-}
-
-/* Cards */
-.gift-grid{
-grid-template-columns:1fr;
-gap:15px;
-}
-
-.gift-card{
-height:260px;
-border-radius:15px;
-}
-
-/* Slides */
 .slide{
 padding:20px 15px;
 }
 
-.content{
-max-width:100%;
-}
-
-.content h1{
-font-size:1.8rem;
-}
-
-.content h2{
-font-size:1.2rem;
-}
-
-.content p{
-font-size:.9rem;
-}
-
-/* Galería */
-.gallery{
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-}
-
-/* Botón */
-button{
-padding:10px 18px;
-font-size:.9rem;
-}
-
-/* Close btn */
 .close-modal{
-width:38px;
-height:38px;
 top:10px;
 right:10px;
-}
-
-/* Ajuste imagen slide */
-.photo-slide img{
-opacity:.6;
+width:38px;
+height:38px;
 }
 }
 
-/* 📱 Tablets */
-@media (min-width: 481px) and (max-width: 1024px){
+/* 💻 Pantalla grande */
+@media(min-width:1200px){
 
-.main-gallery{
-padding:50px 20px;
-}
+.main-gallery{max-width:1400px}
 
-.gift-grid{
-grid-template-columns:repeat(2,1fr);
-}
+.gift-card{height:420px}
 
-.gift-card{
-height:320px;
-}
-
-.content h1{
-font-size:2.5rem;
-}
-
-.content h2{
-font-size:1.5rem;
-}
-
-.gallery{
-grid-template-columns:repeat(3,1fr);
-}
-
-}
-
-/* 💻 Pantallas grandes */
-@media (min-width: 1200px){
-
-.main-gallery{
-max-width:1400px;
-}
-
-/* Cards más grandes */
-.gift-card{
-height:420px;
-}
-
-/* Texto más elegante */
-.content h1{
-font-size:3.8rem;
-}
-
-.content h2{
-font-size:2rem;
-}
-
-/* Galería más amplia */
 .gallery{
 grid-template-columns:repeat(5,1fr);
 }
-
-}
-
-/* 📺 Pantallas muy altas (mejora slides) */
-@media (min-height: 800px){
-
-.slide{
-padding:40px;
-}
-
-.content{
-max-width:700px;
-}
-
-}
-
-/* 📱 Evitar problemas en landscape */
-@media (max-height: 500px){
-
-.slide{
-justify-content:flex-start;
-padding-top:60px;
-}
-
-.gallery{
-grid-template-columns:repeat(3,1fr);
-}
-
 }
