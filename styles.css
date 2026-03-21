@@ -1,65 +1,97 @@
+/* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
-
+html{scroll-behavior:smooth}
 body{
 font-family:'Inter',sans-serif;
 background:#0a0a0a;
 color:#fff;
+overflow-x:hidden;
 }
 
-#loader{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
+/* ===== HEADER ===== */
+.main-gallery{
+padding:60px 20px;
+text-align:center;
+max-width:1200px;
+margin:auto;
 }
 
-.heart-loader{
-font-size:3rem;
-animation:beat 1s infinite;
+.gallery-header h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.5rem,8vw,4rem);
+background:linear-gradient(90deg,#ff0055,#ff7aa2);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:fadeUp 1.2s ease;
 }
 
-@keyframes beat{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.3)}
+.gallery-header p{
+opacity:.7;
+margin-top:10px;
+animation:fadeUp 1.6s ease;
 }
 
+/* ===== CARDS ===== */
 .gift-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
-padding:40px;
+margin-top:40px;
 }
 
 .gift-card{
-height:300px;
+position:relative;
+height:400px;
 border-radius:20px;
 overflow:hidden;
 cursor:pointer;
 background:#111;
+transition:.5s;
+animation:fadeUp 1s ease;
+}
+
+.gift-card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 20px 40px rgba(255,0,100,.4);
+}
+
+.gift-card.locked{
+opacity:.3;
+filter:grayscale(1);
+cursor:not-allowed;
 }
 
 .card-background{
 position:absolute;
 inset:0;
 background-size:cover;
-opacity:.4;
+background-position:center;
+filter:brightness(.4);
+transition:.6s;
+}
+
+.gift-card:hover .card-background{
+transform:scale(1.1);
+filter:brightness(.6);
 }
 
 .card-content{
-position:relative;
+position:absolute;
+bottom:0;
+width:100%;
 padding:20px;
+background:linear-gradient(to top,#000,transparent);
 }
 
+/* ===== MODAL ===== */
 .modal-overlay{
 position:fixed;
 inset:0;
 background:#000;
 opacity:0;
 visibility:hidden;
-transition:.4s;
+transition:.5s;
+z-index:1000;
 }
 
 .modal-overlay.active{
@@ -67,28 +99,341 @@ opacity:1;
 visibility:visible;
 }
 
+/* ===== CLOSE BTN ===== */
+.close-modal{
+position:fixed;
+top:20px;
+right:20px;
+width:45px;
+height:45px;
+border-radius:50%;
+border:none;
+background:rgba(255,255,255,.1);
+color:#fff;
+font-size:1.5rem;
+cursor:pointer;
+backdrop-filter:blur(10px);
+transition:.3s;
+z-index:2000;
+}
+
+.close-modal:hover{
+background:#ff0055;
+transform:rotate(90deg);
+}
+
+/* ===== SLIDES ===== */
+.slides{
+width:100%;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+
 .slide{
 position:absolute;
 inset:0;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-transition:.7s;
+text-align:center;
+padding:30px;
+transition:transform .8s cubic-bezier(.77,0,.175,1),opacity .6s;
 }
 
+/* ===== TEXT ===== */
+.content{
+max-width:600px;
+animation:fadeIn 1.5s ease;
+}
+
+.content h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(2rem,10vw,3.5rem);
+color:#ff0055;
+margin-bottom:10px;
+animation:fadeUp 1s ease;
+}
+
+.content h2{
+font-size:clamp(1.3rem,5vw,2rem);
+font-weight:300;
+margin-bottom:15px;
+animation:fadeUp 1.4s ease;
+}
+
+.content p{
+opacity:.8;
+animation:fadeUp 1.8s ease;
+}
+
+/* ===== BACKGROUNDS ===== */
+.intro{
+background:linear-gradient(rgba(0,0,0,.7),#000),url('IMAGENES/star-bg.jpg') center/cover;
+}
+
+.bg-milo{
+background:linear-gradient(rgba(0,0,0,.7),#000),url('IMAGENES/milo-bg.jpg') center/cover;
+}
+
+.flowers{
+background:linear-gradient(rgba(0,0,0,.5),#000),url('IMAGENES/tulipanes.jpg') center/cover;
+}
+
+.indie{
+background:linear-gradient(rgba(0,0,0,.6),#000),url('IMAGENES/Kevin.jpg') center/cover;
+}
+
+.final-message{
+background:radial-gradient(circle,#ff003c 0%,#000 80%);
+animation:pulseBg 3s infinite;
+}
+
+.blackout{
+background:#000;
+}
+
+/* ===== PHOTO SLIDE ===== */
 .photo-slide img{
+position:absolute;
+inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
-opacity:.6;
+opacity:.5;
+animation:zoomSlow 10s linear infinite;
 }
 
-.reload-btn{
-padding:10px 20px;
+.overlay-text{
+position:relative;
+font-size:clamp(1.8rem,6vw,3rem);
+font-family:'Playfair Display';
+animation:fadeUp 1.5s ease;
+}
+
+/* ===== GALLERY ===== */
+.gallery{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.gallery img{
+width:100%;
+aspect-ratio:1;
+object-fit:cover;
+border-radius:10px;
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.1);
+}
+
+/* ===== BUTTON ===== */
+button{
+padding:12px 25px;
 border-radius:30px;
 border:none;
-background:#ff0055;
+background:linear-gradient(45deg,#ff0055,#ff7aa2);
 color:#fff;
 cursor:pointer;
+font-weight:600;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px rgba(255,0,100,.6);
+}
+
+/* ===== AUDIO ===== */
+.lyrics{
+margin-top:20px;
+font-size:1.5rem;
+color:#ff0055;
+min-height:50px;
+animation:fadeIn 1s ease;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+@keyframes zoomSlow{
+from{transform:scale(1)}
+to{transform:scale(1.1)}
+}
+
+@keyframes pulseBg{
+0%,100%{background:radial-gradient(circle,#ff003c 0%,#000 80%)}
+50%{background:radial-gradient(circle,#ff3366 0%,#000 80%)}
+}
+
+/* ===== RESPONSIVE PRO ===== */
+
+/* 📱 Móviles pequeños */
+@media (max-width: 480px){
+
+.main-gallery{
+padding:30px 15px;
+}
+
+.gallery-header h1{
+font-size:2rem;
+}
+
+.gallery-header p{
+font-size:.9rem;
+}
+
+/* Cards */
+.gift-grid{
+grid-template-columns:1fr;
+gap:15px;
+}
+
+.gift-card{
+height:260px;
+border-radius:15px;
+}
+
+/* Slides */
+.slide{
+padding:20px 15px;
+}
+
+.content{
+max-width:100%;
+}
+
+.content h1{
+font-size:1.8rem;
+}
+
+.content h2{
+font-size:1.2rem;
+}
+
+.content p{
+font-size:.9rem;
+}
+
+/* Galería */
+.gallery{
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+/* Botón */
+button{
+padding:10px 18px;
+font-size:.9rem;
+}
+
+/* Close btn */
+.close-modal{
+width:38px;
+height:38px;
+top:10px;
+right:10px;
+}
+
+/* Ajuste imagen slide */
+.photo-slide img{
+opacity:.6;
+}
+}
+
+/* 📱 Tablets */
+@media (min-width: 481px) and (max-width: 1024px){
+
+.main-gallery{
+padding:50px 20px;
+}
+
+.gift-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.gift-card{
+height:320px;
+}
+
+.content h1{
+font-size:2.5rem;
+}
+
+.content h2{
+font-size:1.5rem;
+}
+
+.gallery{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+/* 💻 Pantallas grandes */
+@media (min-width: 1200px){
+
+.main-gallery{
+max-width:1400px;
+}
+
+/* Cards más grandes */
+.gift-card{
+height:420px;
+}
+
+/* Texto más elegante */
+.content h1{
+font-size:3.8rem;
+}
+
+.content h2{
+font-size:2rem;
+}
+
+/* Galería más amplia */
+.gallery{
+grid-template-columns:repeat(5,1fr);
+}
+
+}
+
+/* 📺 Pantallas muy altas (mejora slides) */
+@media (min-height: 800px){
+
+.slide{
+padding:40px;
+}
+
+.content{
+max-width:700px;
+}
+
+}
+
+/* 📱 Evitar problemas en landscape */
+@media (max-height: 500px){
+
+.slide{
+justify-content:flex-start;
+padding-top:60px;
+}
+
+.gallery{
+grid-template-columns:repeat(3,1fr);
+}
+
 }
