@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentSlide = 0;
     let isAnimating = false;
+    let touchStartY = 0;
+    let touchEndY = 0;
 
     // ABRIR / CERRAR MODAL
     openSorpresa.addEventListener("click", () => {
@@ -49,6 +51,28 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!modal.classList.contains("active")) return;
         moveSlide(e.deltaY > 0 ? "next" : "prev");
     });
+
+    // SOPORTE PARA CELULARES (TOUCH)
+window.addEventListener("touchstart", (e) => {
+    if (!modal.classList.contains("active")) return;
+    touchStartY = e.changedTouches[0].screenY;
+}, false);
+
+window.addEventListener("touchend", (e) => {
+    if (!modal.classList.contains("active")) return;
+    touchEndY = e.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+function handleGesture() {
+    const swipeThreshold = 50; // Sensibilidad del deslizamiento
+    if (touchEndY < touchStartY - swipeThreshold) {
+        moveSlide("next"); // Deslizó hacia arriba
+    }
+    if (touchEndY > touchStartY + swipeThreshold) {
+        moveSlide("prev"); // Deslizó hacia abajo
+    }
+}
 
     startBtn.addEventListener("click", () => moveSlide("next"));
 
