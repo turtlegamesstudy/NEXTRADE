@@ -408,3 +408,165 @@ h1, h2, h3 {
     font-style: italic;
     color: #e0e0e0;
 }
+
+
+/* --- DISEÑO DEL GIRASOL --- */
+.flower-experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.sunflower {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform: scale(0); /* Empieza invisible */
+    transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Activa la animación cuando el modal está activo */
+.modal-overlay.active .sunflower {
+    transform: scale(1.2);
+}
+
+.sunflower .center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    background: radial-gradient(#4d2600, #2b1600);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.sunflower .stem {
+    position: absolute;
+    top: 100%; left: 50%;
+    width: 10px; height: 150px;
+    background: linear-gradient(to bottom, #2d5a27, #1e3d1a);
+    transform: translateX(-50%);
+    border-radius: 0 0 5px 5px;
+}
+
+.petals-wrapper {
+    position: absolute;
+    width: 100%; height: 100%;
+    animation: rotateFlower 20s linear infinite;
+}
+
+.petals-wrapper div {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 35px; height: 90px;
+    background: linear-gradient(to top, #f7d547, #ffec85);
+    border-radius: 50% 50% 10% 10%;
+    transform-origin: bottom center;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+}
+
+/* Posicionamiento circular de pétalos */
+.p1 { transform: translate(-50%, -100%) rotate(0deg); }
+.p2 { transform: translate(-50%, -100%) rotate(30deg); }
+.p3 { transform: translate(-50%, -100%) rotate(60deg); }
+.p4 { transform: translate(-50%, -100%) rotate(90deg); }
+.p5 { transform: translate(-50%, -100%) rotate(120deg); }
+.p6 { transform: translate(-50%, -100%) rotate(150deg); }
+.p7 { transform: translate(-50%, -100%) rotate(180deg); }
+.p8 { transform: translate(-50%, -100%) rotate(210deg); }
+.p9 { transform: translate(-50%, -100%) rotate(240deg); }
+.p10 { transform: translate(-50%, -100%) rotate(270deg); }
+.p11 { transform: translate(-50%, -100%) rotate(300deg); }
+.p12 { transform: translate(-50%, -100%) rotate(330deg); }
+
+/* Estilo del texto */
+.flower-message {
+    margin-top: 40px;
+    color: #4a3b00;
+}
+
+.dedicatoria {
+    display: block;
+    margin-top: 15px;
+    font-style: italic;
+    font-family: var(--font-headings);
+    font-size: 1.4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease 1s; /* Aparece después de la flor */
+}
+
+.modal-overlay.active .dedicatoria {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes rotateFlower {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* --- MEJORAS DINÁMICAS FLORES --- */
+
+.flower-experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+}
+
+/* Animación para que el girasol "viva" */
+.sunflower {
+    animation: floating 3s ease-in-out infinite;
+    transform-origin: bottom center;
+    margin-bottom: 2rem;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Estilo para las frases que van a cambiar */
+.flower-message {
+    text-align: center;
+    max-width: 80%;
+}
+
+.bloom-text {
+    font-size: 2.5rem;
+    color: #856404;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+#dynamic-phrase {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #4a3b00;
+    min-height: 3rem;
+    transition: opacity 0.8s ease;
+    font-style: italic;
+}
+
+/* Partículas de brillo (Sparkles) */
+.sparkle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 10px #fff, 0 0 20px #f7d547;
+    animation: fall linear forwards;
+}
+
+/* Ajuste de los pétalos para que se vean más naturales */
+.petal {
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+}
