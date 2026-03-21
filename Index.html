@@ -2,21 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mis Regalos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Paletita ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <div id="loader">
+        <div class="loader-content">
+            <div class="heart-loader">❤️</div>
+            <p>Preparando algo especial para ti...</p>
+        </div>
+    </div>
+
     <main class="main-gallery">
         <header class="gallery-header">
             <h1>Para Paletita</h1>
             <p>Hecho con ❤️ por Zelly</p>
+            
+            <button class="reload-btn" onclick="location.reload()">
+                <span>↺</span> Recargar Galería
+            </button>
         </header>
-        <button class="reload-btn" onclick="location.reload()">
-    <span>↺</span> Recargar Galería
-</button>
 
         <div class="gift-grid">
             <div class="gift-card" id="openSorpresa">
@@ -44,13 +52,13 @@
     </main>
 
     <div id="sorpresaModal" class="modal-overlay">
-        <button class="close-modal">&times;</button>
+        <button class="close-modal" aria-label="Cerrar">&times;</button>
         
         <div class="slides">
             <section class="slide intro">
                 <div class="content">
                     <h1>Sorpresa Paletita</h1>
-                    <p>¿Estás lista?</p>
+                    <p>¿Estás lista para ver esto?</p>
                     <button id="startExperience">Comenzar</button>
                 </div>
             </section>
@@ -64,7 +72,9 @@
 
             <section class="slide photo-slide">
                 <img src="IMAGENES/Ella1.jpg" alt="Ella">
-                <h2 class="overlay-text">Y cambió todo.</h2>
+                <div class="content">
+                    <h2 class="overlay-text">Y cambió todo mi mundo.</h2>
+                </div>
             </section>
 
             <section class="slide dark">
@@ -78,14 +88,14 @@
             <section class="slide stat">
                 <div class="content">
                     <h1>9,999+</h1>
-                    <p>Veces que pensé en ti</p>
+                    <p>Veces que apareciste en mi mente hoy</p>
                 </div>
             </section>
 
             <section class="slide soft">
                 <div class="content">
                     <h2>Contigo me siento en casa</h2>
-                    <p>Como Snoopy cuando encuentra su lugar favorito.</p>
+                    <p>Como Snoopy cuando encuentra su lugar favorito en el mundo.</p>
                 </div>
             </section>
 
@@ -98,23 +108,31 @@
 
             <section class="slide photo-slide">
                 <img src="IMAGENES/Ella.jpg" alt="Momento juntos">
-                <h2 class="overlay-text">Nuestro momento favorito.</h2>
+                <div class="content">
+                    <h2 class="overlay-text">Mi momento favorito es cualquiera contigo.</h2>
+                </div>
             </section>
 
             <section class="slide stat">
                 <div class="content">
                     <h1 id="daysCounter">0</h1>
-                    <p>Días desde que te conocí</p>
+                    <p>Días de conocer a la persona más increíble</p>
                 </div>
             </section>
 
             <section class="slide gallery-slide">
-                <h2>Nuestros recuerdos</h2>
-                <div class="gallery">
-                    <img src="IMAGENES/f1.jpeg" alt="1"><img src="IMAGENES/f2.jpeg" alt="2">
-                    <img src="IMAGENES/f3.jpeg" alt="3"><img src="IMAGENES/f4.jpeg" alt="4">
-                    <img src="IMAGENES/f5.jpeg" alt="5"><img src="IMAGENES/f6.jpeg" alt="6">
-                    <img src="IMAGENES/f7.jpeg" alt="7"><img src="IMAGENES/f8.jpeg" alt="8">
+                <div class="content">
+                    <h2>Nuestros recuerdos</h2>
+                    <div class="gallery">
+                        <img src="IMAGENES/f1.jpeg" alt="Recuerdo 1">
+                        <img src="IMAGENES/f2.jpeg" alt="Recuerdo 2">
+                        <img src="IMAGENES/f3.jpeg" alt="Recuerdo 3">
+                        <img src="IMAGENES/f4.jpeg" alt="Recuerdo 4">
+                        <img src="IMAGENES/f5.jpeg" alt="Recuerdo 5">
+                        <img src="IMAGENES/f6.jpeg" alt="Recuerdo 6">
+                        <img src="IMAGENES/f7.jpeg" alt="Recuerdo 7">
+                        <img src="IMAGENES/f8.jpeg" alt="Recuerdo 8">
+                    </div>
                 </div>
             </section>
 
@@ -129,25 +147,27 @@
             <section class="slide dark">
                 <div class="content">
                     <h2>No sé qué somos exactamente...</h2>
-                    <p>Pero sí sé que quiero seguir descubriéndolo contigo.</p>
+                    <p>Pero sí sé que quiero seguir descubriendo cada parte de ti.</p>
                 </div>
             </section>
 
             <section class="slide blackout">
-                <h1>...</h1>
+                <div class="content">
+                    <h1>...</h1>
+                </div>
             </section>
 
             <section class="slide final-message">
                 <div class="content">
                     <h1>Me gustas.</h1>
-                    <p>Y no poco.</p>
+                    <p>Y no tienes idea de cuánto.</p>
                 </div>
             </section>
 
             <section class="slide audio-slide">
                 <div class="content">
                     <h2>Escucha esto cuando estés lista</h2>
-                    <button id="playAudio">Reproducir</button>
+                    <button id="playAudio">▶ Reproducir Música</button>
                     <div id="lyrics" class="lyrics"></div>
                     <audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
                 </div>
