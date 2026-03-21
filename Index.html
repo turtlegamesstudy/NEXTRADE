@@ -1,210 +1,254 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Mis Regalos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Para Ti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<main class="main-gallery">
-<header class="gallery-header">
-<h1>Para Ti</h1>
-<p>Hecho con ❤️ el 13/02/2026</p>
-</header>
+    <div id="canvas-container">
+        <canvas id="particleCanvas"></canvas>
+    </div>
 
-<div class="gift-grid">
-<div class="gift-card" id="openSorpresa">
-<div class="card-background" style="background-image: url('IMAGENES/Ella1.jpg');"></div>
-<div class="card-content">
-<h2>Sorpresa Paletita</h2>
-<p>Nuestra historia</p>
-</div>
-</div>
+    <main class="main-gallery">
+        <header class="gallery-header">
+            <h1 class="glow-text">Para Ti</h1>
+            <p class="subtitle">Hecho con ❤️ el 13/02/2026</p>
+        </header>
 
-<div class="gift-card locked">
-<div class="card-content">
-<h2>Carta Especial</h2>
-<p>Próximamente...</p>
-</div>
-</div>
+        <div class="gift-grid">
+            <div class="gift-card" data-target="modalHistoria">
+                <div class="card-background" style="background-image: url('IMAGENES/Ella1.jpg');"></div>
+                <div class="card-content">
+                    <h2>Sorpresa Paletita</h2>
+                    <p>Nuestra historia</p>
+                </div>
+            </div>
 
-<div class="gift-card locked">
-<div class="card-content">
-<h2>Playlist</h2>
-<p>Canciones que me recuerdan a ti</p>
-</div>
-</div>
-</div>
-</main>
+            <div class="gift-card" data-target="modalFlores">
+                <div class="card-background" style="background-color: #f7d547;"></div>
+                <div class="card-content">
+                    <h2>Flores Amarillas 🌼</h2>
+                    <p>Para la más bonita</p>
+                </div>
+            </div>
 
-<div id="sorpresaModal" class="modal-overlay">
-<button class="close-modal">&times;</button>
+            <div class="gift-card" data-target="modalCarta">
+                <div class="card-background" style="background-color: #2a1b24;"></div>
+                <div class="card-content">
+                    <h2>Carta Especial 💌</h2>
+                    <p>Lo que siento</p>
+                </div>
+            </div>
 
-<div class="slides">
+            <div class="gift-card" data-target="modalPlaylist">
+                <div class="card-background" style="background-color: #1a1a2e;"></div>
+                <div class="card-content">
+                    <h2>Playlist 🎶</h2>
+                    <p>Canciones que me recuerdan a ti</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-<!-- INTRO -->
-<section class="slide intro">
-<div class="content">
-<h1>Sorpresa Paletita</h1>
-<p>¿Estás lista para algo especial?</p>
-<button id="startExperience">Comenzar</button>
-</div>
-</section>
+    <div id="modalHistoria" class="modal-overlay">
+        <button class="close-modal">&times;</button>
+        <div class="scroll-container">
+            
+            <section class="slide intro">
+                <div class="content fade-up">
+                    <h1>Sorpresa Paletita</h1>
+                    <p>Desliza hacia abajo para comenzar...</p>
+                    <div class="scroll-indicator">↓</div>
+                </div>
+            </section>
 
-<!-- INICIO HISTORIA -->
-<section class="slide dark bg-milo">
-<div class="content">
-<h2>En 2025 conocí a alguien...</h2>
-<p>Y no sabía lo importante que sería</p>
-</div>
-</section>
+            <section class="slide dark bg-milo">
+                <div class="content fade-up">
+                    <h2>En 2025 conocí a alguien...</h2>
+                    <p>Y no sabía lo importante que sería</p>
+                </div>
+            </section>
 
-<section class="slide photo-slide">
-<img src="IMAGENES/Ella1.jpg">
-<h2 class="overlay-text">Y cambió todo.</h2>
-</section>
+            <section class="slide photo-slide">
+                <img src="IMAGENES/Ella1.jpg" alt="Ella">
+                <h2 class="overlay-text fade-up">Y cambió todo.</h2>
+            </section>
 
-<section class="slide dark">
-<div class="content">
-<h2>Desde ese día...</h2>
-<p>empecé a ver todo diferente</p>
-</div>
-</section>
+            <section class="slide dark">
+                <div class="content fade-up">
+                    <h2>Desde ese día...</h2>
+                    <p>empecé a ver todo diferente</p>
+                </div>
+            </section>
 
-<!-- PERSONALIDAD -->
-<section class="slide dark">
-<div class="content">
-<h2>Tu vibra sería una canción de</h2>
-<h1>Milo J</h1>
-<p>Profunda. Real. Diferente.</p>
-</div>
-</section>
+            <section class="slide dark">
+                <div class="content fade-up">
+                    <h2>Tu vibra sería una canción de</h2>
+                    <h1 class="gold-text">Milo J</h1>
+                    <p>Profunda. Real. Diferente.</p>
+                </div>
+            </section>
 
-<section class="slide stat">
-<div class="content">
-<h1>9,999+</h1>
-<p>Veces que pensé en ti</p>
-</div>
-</section>
+            <section class="slide stat">
+                <div class="content fade-up">
+                    <h1 class="gold-text">9,999+</h1>
+                    <p>Veces que pensé en ti</p>
+                </div>
+            </section>
 
-<!-- SENTIMIENTO -->
-<section class="slide soft">
-<div class="content">
-<h2>Contigo me siento en casa</h2>
-<p>Como si todo tuviera sentido por un momento</p>
-</div>
-</section>
+            <section class="slide soft">
+                <div class="content fade-up">
+                    <h2>Contigo me siento en casa</h2>
+                    <p>Como si todo tuviera sentido por un momento</p>
+                </div>
+            </section>
 
-<section class="slide soft">
-<div class="content">
-<h2>Y no sé cómo explicarlo...</h2>
-<p>pero contigo todo se siente más fácil</p>
-</div>
-</section>
+            <section class="slide soft">
+                <div class="content fade-up">
+                    <h2>Y no sé cómo explicarlo...</h2>
+                    <p>pero contigo todo se siente más fácil</p>
+                </div>
+            </section>
 
-<!-- FLORES -->
-<section class="slide flowers">
-<div class="content">
-<h2>Si fueras una flor...</h2>
-<h1>Serías tulipanes 🌷</h1>
-<p>Bonita sin esfuerzo</p>
-</div>
-</section>
+            <section class="slide flowers">
+                <div class="content fade-up">
+                    <h2>Si fueras una flor...</h2>
+                    <h1 class="pink-text">Serías tulipanes 🌷</h1>
+                    <p>Bonita sin esfuerzo</p>
+                </div>
+            </section>
 
-<!-- MOMENTOS -->
-<section class="slide photo-slide">
-<img src="IMAGENES/Ella.jpg">
-<h2 class="overlay-text">Nuestro momento favorito.</h2>
-</section>
+            <section class="slide photo-slide">
+                <img src="IMAGENES/Ella.jpg" alt="Momento favorito">
+                <h2 class="overlay-text fade-up">Nuestro momento favorito.</h2>
+            </section>
 
-<section class="slide dark">
-<div class="content">
-<h2>Y quiero más momentos así...</h2>
-<p>muchos más</p>
-</div>
-</section>
+            <section class="slide dark">
+                <div class="content fade-up">
+                    <h2>Y quiero más momentos así...</h2>
+                    <p>muchos más</p>
+                </div>
+            </section>
 
-<!-- CONTADOR -->
-<section class="slide stat">
-<div class="content">
-<h1 id="daysCounter">0</h1>
-<p>Días desde que te conocí</p>
-</div>
-</section>
+            <section class="slide stat">
+                <div class="content fade-up">
+                    <h1 id="daysCounter" class="gold-text">0</h1>
+                    <p>Días desde que te conocí</p>
+                </div>
+            </section>
 
-<!-- GALERÍA -->
-<section class="slide gallery-slide">
-<h2>Nuestros recuerdos</h2>
-<div class="gallery">
-<img src="IMAGENES/f1.jpeg"><img src="IMAGENES/f2.jpeg">
-<img src="IMAGENES/f3.jpeg"><img src="IMAGENES/f4.jpeg">
-<img src="IMAGENES/f5.jpeg"><img src="IMAGENES/f6.jpeg">
-<img src="IMAGENES/f7.jpeg"><img src="IMAGENES/f8.jpeg">
-</div>
-</section>
+            <section class="slide gallery-slide">
+                <div class="content fade-up">
+                    <h2>Nuestros recuerdos</h2>
+                    <div class="gallery">
+                        <img src="IMAGENES/f1.jpeg"><img src="IMAGENES/f2.jpeg">
+                        <img src="IMAGENES/f3.jpeg"><img src="IMAGENES/f4.jpeg">
+                        <img src="IMAGENES/f5.jpeg"><img src="IMAGENES/f6.jpeg">
+                        <img src="IMAGENES/f7.jpeg"><img src="IMAGENES/f8.jpeg">
+                    </div>
+                </div>
+            </section>
 
-<!-- ESTILO MUSICAL -->
-<section class="slide indie">
-<div class="content">
-<h2>Si esto fuera una canción sería de</h2>
-<h1>Kevin Kaarl</h1>
-<p>Suave. Sincera. Eterna.</p>
-</div>
-</section>
+            <section class="slide indie">
+                <div class="content fade-up">
+                    <h2>Si esto fuera una canción sería de</h2>
+                    <h1 class="gold-text">Kevin Kaarl</h1>
+                    <p>Suave. Sincera. Eterna.</p>
+                </div>
+            </section>
 
-<!-- CONFESIÓN -->
-<section class="slide dark">
-<div class="content">
-<h2>No sé qué somos exactamente...</h2>
-<p>Pero sí sé algo</p>
-</div>
-</section>
+            <section class="slide dark">
+                <div class="content fade-up">
+                    <h2>No sé qué somos exactamente...</h2>
+                    <p>Pero sí sé algo</p>
+                </div>
+            </section>
 
-<section class="slide dark">
-<div class="content">
-<h2>Me gusta estar contigo</h2>
-<p>y no quiero perder eso</p>
-</div>
-</section>
+            <section class="slide dark">
+                <div class="content fade-up">
+                    <h2>Me gusta estar contigo</h2>
+                    <p>y no quiero perder eso</p>
+                </div>
+            </section>
 
-<!-- PAUSA DRAMÁTICA -->
-<section class="slide blackout">
-<h1>...</h1>
-</section>
+            <section class="slide blackout">
+                <h1 class="fade-up">...</h1>
+            </section>
 
-<!-- IMPACTO -->
-<section class="slide final-message">
-<div class="content">
-<h1>Me gustas.</h1>
-<p>Y no poco.</p>
-</div>
-</section>
+            <section class="slide final-message">
+                <div class="content fade-up">
+                    <h1 class="pink-text">Me gustas.</h1>
+                    <p>Y no poco.</p>
+                </div>
+            </section>
 
-<section class="slide final-message">
-<div class="content">
-<h1>Me gustas mucho.</h1>
-<p>Y esto es solo el inicio.</p>
-</div>
-</section>
+            <section class="slide final-message">
+                <div class="content fade-up">
+                    <h1 class="pink-text">Me gustas mucho.</h1>
+                    <p>Y esto es solo el inicio.</p>
+                </div>
+            </section>
 
-<!-- AUDIO FINAL -->
-<section class="slide audio-slide">
-<div class="content">
-<h2>Escucha esto cuando estés lista</h2>
-<button id="playAudio">Reproducir</button>
-<div id="lyrics" class="lyrics"></div>
-<audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
-</div>
-</section>
+            <section class="slide audio-slide">
+                <div class="content fade-up">
+                    <h2>Escucha esto cuando estés lista</h2>
+                    <button id="playAudio" class="play-btn-large">▶ Reproducir</button>
+                    <div id="lyrics" class="lyrics"></div>
+                    <audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
+                </div>
+            </section>
+        </div>
+    </div>
 
-</div>
-</div>
+    <div id="modalFlores" class="modal-overlay warm-bg">
+        <button class="close-modal dark-btn">&times;</button>
+        <div id="petals-container"></div>
+        <div class="static-content fade-up">
+            <h1>Para ti 🌼</h1>
+            <p>Porque quiero que te quedes en mi vida por mucho tiempo.</p>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <div id="modalCarta" class="modal-overlay dark-paper">
+        <button class="close-modal">&times;</button>
+        <div class="letter-container">
+            <h2 class="letter-title">Mi niña,</h2>
+            <div id="typewriter-text" class="letter-body"></div>
+        </div>
+    </div>
+
+    <div id="modalPlaylist" class="modal-overlay dark-music">
+        <button class="close-modal">&times;</button>
+        <div class="static-content fade-up">
+            <h1>Nuestras Canciones</h1>
+            <p>La banda sonora de nosotros</p>
+            <ul class="playlist-list">
+                <li class="track">
+                    <div class="track-info">
+                        <span class="track-name">Otro Año</span>
+                        <span class="track-artist">Indie Folk vibe</span>
+                    </div>
+                </li>
+                <li class="track">
+                    <div class="track-info">
+                        <span class="track-name">Flaquita Mía</span>
+                        <span class="track-artist">Para cantártela</span>
+                    </div>
+                </li>
+                 <li class="track">
+                    <div class="track-info">
+                        <span class="track-name">San Lucas</span>
+                        <span class="track-artist">Kevin Kaarl</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
