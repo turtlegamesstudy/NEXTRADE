@@ -17,14 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchEndY = 0;
 
     // === 1. DESACTIVAR LOADER ===
-    // Espera a que todo cargue y desvanece el loader
     window.addEventListener("load", () => {
         setTimeout(() => {
             loader.style.opacity = "0";
             setTimeout(() => {
                 loader.style.display = "none";
             }, 1000);
-        }, 2000); // 2 segundos de latido de corazón inicial
+        }, 2000);
     });
 
     // === 2. ABRIR / CERRAR MODAL ===
@@ -40,21 +39,30 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "auto";
         audio.pause();
         audio.currentTime = 0;
-        currentLine = 0; // Reiniciar letras
+        currentLine = 0;
         lyricsContainer.textContent = "";
+        
+        // Resetear animaciones de flores al cerrar
+        document.querySelectorAll('.flowers-animated').forEach(s => s.classList.remove('active-animation'));
     });
 
     // === 3. NAVEGACIÓN SLIDES ===
     function updateSlides() {
         slides.forEach((slide, index) => {
+            // Efecto de desplazamiento vertical
             slide.style.transform = `translateY(${100 * (index - currentSlide)}vh) scale(${index === currentSlide ? 1 : 0.95})`;
             
-            // Gestionar clase de animación para CSS
             if (index === currentSlide) {
                 slide.classList.add("active-animation");
-                // Si llegamos al slide del contador, iniciarlo
+                
+                // DISPARADOR: Contador de días
                 if (slide.querySelector("#daysCounter")) {
                     startCounter();
+                }
+
+                // DISPARADOR: Flores Amarillas (Si el slide tiene la clase)
+                if (slide.classList.contains("flowers-animated")) {
+                    console.log("Iniciando jardín..."); // Para debug
                 }
             } else {
                 slide.classList.remove("active-animation");
@@ -72,11 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => { isAnimating = false; }, 900);
     }
 
-    // Navegación con Scroll
+    // Navegación con Scroll y Teclado
     window.addEventListener("wheel", (e) => {
         if (!modal.classList.contains("active")) return;
         moveSlide(e.deltaY > 0 ? "next" : "prev");
     }, { passive: true });
+
+    window.addEventListener("keydown", (e) => {
+        if (!modal.classList.contains("active")) return;
+        if (e.key === "ArrowDown") moveSlide("next");
+        if (e.key === "ArrowUp") moveSlide("prev");
+    });
 
     // === 4. SOPORTE TOUCH (Celulares) ===
     modal.addEventListener("touchstart", (e) => {
@@ -90,10 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (touchEndY - touchStartY > swipeThreshold) moveSlide("prev");
     }, { passive: true });
 
-    startBtn.addEventListener("click", () => moveSlide("next"));
+    if(startBtn) startBtn.addEventListener("click", () => moveSlide("next"));
 
     // === 5. CONTADOR DINÁMICO ===
     function startCounter() {
+        // Tu fecha especial: 14 de Octubre 2025
         const startDate = new Date("2025-10-14");
         const today = new Date();
         const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
@@ -103,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const interval = setInterval(() => {
             if (count < diffDays) {
-                count += Math.ceil(diffDays / 40); // Velocidad
+                count += Math.ceil(diffDays / 40);
                 if (count > diffDays) count = diffDays;
                 daysCounter.textContent = count;
             } else {
@@ -112,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 40);
     }
 
-    // === 6. AUDIO & LETRAS SINCRONIZADAS ===
+    // === 6. AUDIO & LETRAS (Basado en tu canción "Otro Año" u otra de ElHanzell) ===
     const lyrics = [
         { time: 2, text: "Ay yo no sé cómo expresarme..." },
         { time: 6, text: "Por eso escribí esta canción..." },
@@ -129,8 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { time: 50, text: "Para hacerte muy feliz." }
     ];
 
-    let currentLine = 0;
-
     audioBtn.addEventListener("click", () => {
         if (audio.paused) {
             audio.play();
@@ -143,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     audio.addEventListener("timeupdate", () => {
-        // Encontrar la línea correcta basada en el tiempo actual
         let lineToShow = lyrics.find((l, i) => {
             let nextLine = lyrics[i + 1];
             return audio.currentTime >= l.time && (!nextLine || audio.currentTime < nextLine.time);
@@ -151,15 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (lineToShow && lyricsContainer.textContent !== lineToShow.text) {
             lyricsContainer.classList.remove("animate");
-            void lyricsContainer.offsetWidth; // Reset de animación
+            void lyricsContainer.offsetWidth; 
             lyricsContainer.textContent = lineToShow.text;
             lyricsContainer.classList.add("animate");
         }
     });
 
-    // Reset de letras si el audio termina
     audio.addEventListener("ended", () => {
         audioBtn.textContent = "▶ Reproducir Música";
-        currentLine = 0;
     });
 });
