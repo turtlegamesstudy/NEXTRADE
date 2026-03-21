@@ -128,6 +128,7 @@ position:relative;
 overflow-y:auto;
 height:100vh;
 scroll-snap-type:y mandatory;
+-webkit-overflow-scrolling:touch;
 }
 
 .slide{
@@ -137,8 +138,8 @@ scroll-snap-align:start;
 display:flex;
 justify-content:center;
 align-items:center;
+padding:40px 20px;
 }
-
 /* ===== TEXT ===== */
 .content{
 max-width:600px;
