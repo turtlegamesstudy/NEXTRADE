@@ -125,35 +125,84 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(typeWriterTimeout);
     }
 
-    // --- 5. ANIMACIÓN FLORES AMARILLAS ---
-    const petalsContainer = document.getElementById('petals-container');
-    let petalInterval;
+   // --- 3. ANIMACIÓN FLORES AMARILLAS MEJORADA ---
+const petalsContainer = document.getElementById('petals-container');
+const phraseElement = document.querySelector('.flower-message p'); // Seleccionamos el p del mensaje
+let petalInterval;
+let phraseInterval;
 
-    function iniciarFlores() {
-        if(!petalsContainer) return;
-        petalInterval = setInterval(crearPetalo, 300);
-    }
+// Lista de frases románticas y dinámicas
+const frasesFlores = [
+    "Porque te mereces todo lo bonito de este mundo... 🌻",
+    "Eres mi momento favorito del día.",
+    "Un detalle amarillo para la niña más linda. ✨",
+    "Tu sonrisa ilumina más que cualquier girasol.",
+    "Quiero que te quedes en mi vida por mucho tiempo. ❤️",
+    "Eres luz, eres paz, eres música.",
+    "Contigo todo se siente más suave.",
+    "Para mi niña, hoy y siempre. 🌼"
+];
 
-    function detenerFlores() {
-        clearInterval(petalInterval);
-        if(petalsContainer) petalsContainer.innerHTML = '';
-    }
+function iniciarFlores() {
+    // 1. Iniciar lluvia de pétalos y brillos
+    petalInterval = setInterval(crearElementoMagico, 250);
+    
+    // 2. Iniciar cambio de frases
+    cambiarFrase(); // Primera frase
+    phraseInterval = setInterval(cambiarFrase, 4000); // Cambia cada 4 segundos
+}
 
-    function crearPetalo() {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
+function detenerFlores() {
+    clearInterval(petalInterval);
+    clearInterval(phraseInterval);
+    if(petalsContainer) petalsContainer.innerHTML = '';
+}
+
+function cambiarFrase() {
+    const p = document.getElementById('dynamic-phrase') || phraseElement;
+    if(!p) return;
+
+    // Efecto de desvanecimiento
+    p.style.opacity = 0;
+    
+    setTimeout(() => {
+        const index = Math.floor(Math.random() * frasesFlores.length);
+        p.innerText = frasesFlores[index];
+        p.style.opacity = 1;
+    }, 800);
+}
+
+function crearElementoMagico() {
+    if(!petalsContainer) return;
+
+    const element = document.createElement('div');
+    const isSparkle = Math.random() > 0.7; // 30% de probabilidad de ser un brillo en vez de pétalo
+    
+    if(isSparkle) {
+        element.classList.add('sparkle');
+        const size = Math.random() * 5 + 2;
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+    } else {
+        element.classList.add('petal');
         const size = Math.random() * 15 + 10;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 3 + 4;
-        
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size}px`;
-        petal.style.left = `${left}vw`;
-        petal.style.animationDuration = `${duration}s`;
-        
-        petalsContainer.appendChild(petal);
-        setTimeout(() => petal.remove(), duration * 1000);
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
     }
+    
+    const left = Math.random() * 100;
+    const duration = Math.random() * 3 + 4;
+    
+    element.style.left = `${left}vw`;
+    element.style.top = `-20px`;
+    element.style.animationDuration = `${duration}s`;
+    
+    petalsContainer.appendChild(element);
+    
+    setTimeout(() => {
+        element.remove();
+    }, duration * 1000);
+}
 
     // --- 6. CONTADOR DE DÍAS ANIMADO ---
     const targetDays = 158; // Cambia este valor por los días reales
