@@ -1,193 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Paletita ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Paletita ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <div id="loader">
-        <div class="loader-content">
-            <div class="heart-loader">❤️</div>
-            <p>Preparando algo especial para ti...</p>
-        </div>
+<div id="loader">
+    <div class="loader-content">
+        <div class="heart-loader">❤️</div>
+        <p>Preparando algo especial para ti...</p>
     </div>
+</div>
 
-    <main class="main-gallery">
-        <header class="gallery-header">
-            <h1>Para Paletita</h1>
-            <p>Hecho con ❤️ por Zelly</p>
-            
-            <button class="reload-btn" onclick="location.reload()">
-                <span>↺</span> Recargar Galería
-            </button>
-        </header>
+<main class="main-gallery">
+<header class="gallery-header">
+<h1>Para Paletita</h1>
+<p>Hecho con ❤️ por Zelly</p>
 
-        <div class="gift-grid">
-            <div class="gift-card" id="openSorpresa">
-                <div class="card-background" style="background-image: url('IMAGENES/Ella1.jpg');"></div>
-                <div class="card-content">
-                    <h2>Sorpresa Paletita</h2>
-                    <p>Nuestra historia</p>
-                </div>
-            </div>
+<button class="reload-btn" onclick="location.reload()">
+<span>↺</span> Recargar Galería
+</button>
+</header>
 
-            <div class="gift-card locked">
-                <div class="card-content">
-                    <h2>Carta Especial</h2>
-                    <p>Próximamente...</p>
-                </div>
-            </div>
+<div class="gift-grid">
+<div class="gift-card" id="openSorpresa">
+<div class="card-background" style="background-image:url('IMAGENES/Ella1.jpg')"></div>
+<div class="card-content">
+<h2>Sorpresa Paletita</h2>
+<p>Nuestra historia</p>
+</div>
+</div>
 
-            <div class="gift-card locked">
-                <div class="card-content">
-                    <h2>Playlist</h2>
-                    <p>Canciones que me recuerdan a ti</p>
-                </div>
-            </div>
-        </div>
-    </main>
+<div class="gift-card locked">
+<div class="card-content">
+<h2>Carta Especial</h2>
+<p>Próximamente...</p>
+</div>
+</div>
+</div>
+</main>
 
-    <div id="sorpresaModal" class="modal-overlay">
-        <button class="close-modal" aria-label="Cerrar">&times;</button>
-        
-        <div class="slides">
-            <section class="slide intro">
-                <div class="content">
-                    <h1>Sorpresa Paletita</h1>
-                    <p>¿Estás lista para ver esto?</p>
-                    <button id="startExperience" class="reload-btn" style="color: white; border-color: white;">Comenzar</button>
-                </div>
-            </section>
+<div id="sorpresaModal" class="modal-overlay">
+<button class="close-modal">&times;</button>
 
-            <section class="slide dark bg-milo">
-                <div class="content">
-                    <h2>En 2025 conocí a alguien...</h2>
-                </div>
-            </section>
+<div class="slides">
+<section class="slide intro">
+<div class="content">
+<h1>Sorpresa Paletita</h1>
+<button id="startExperience" class="reload-btn">Comenzar</button>
+</div>
+</section>
 
-            <section class="slide photo-slide">
-                <img src="IMAGENES/Ella1.jpg" alt="Ella">
-                <div class="content">
-                    <h2 class="overlay-text">Y cambió todo mi mundo.</h2>
-                </div>
-            </section>
+<section class="slide dark">
+<div class="content">
+<h2>En 2025 conocí a alguien...</h2>
+</div>
+</section>
 
-            <section class="slide dark">
-                <div class="content">
-                    <h2>Tu vibra sería una canción de</h2>
-                    <h1>Milo J</h1>
-                    <p>Profunda. Real. Diferente.</p>
-                </div>
-            </section>
+<section class="slide photo-slide">
+<img src="IMAGENES/Ella1.jpg">
+<div class="content">
+<h2 class="overlay-text">Y cambió todo mi mundo.</h2>
+</div>
+</section>
 
-            <section class="slide soft">
-                <div class="content">
-                    <h2>Contigo me siento en casa</h2>
-                    <p>Como Snoopy cuando encuentra su lugar favorito en el mundo.</p>
-                </div>
-            </section>
+<section class="slide stat">
+<div class="content">
+<h1 id="daysCounter">0</h1>
+<p>Días juntos</p>
+</div>
+</section>
 
-            <section class="slide flowers">
-                <div class="content">
-                    <h2>Si fueras una flor...</h2>
-                    <h1>Serías tulipanes.</h1>
-                </div>
-            </section>
+<section class="slide audio-slide">
+<div class="content">
+<button id="playAudio" class="reload-btn">▶ Música</button>
+<div id="lyrics"></div>
+<audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
+</div>
+</section>
 
-            <section class="slide flowers-animated">
-                <div class="night-garden"></div>
-                <div class="flower-message">
-                    <p class="fade-in">Hoy el mundo se llena de flores amarillas...</p>
-                    <h2 class="gold-text">Pero tú no eres como el resto.</h2>
-                    <div class="special-note">
-                        <p>No necesito una fecha en el calendario para recordarte lo que siento.</p>
-                        <p class="highlight">Para mí, todos los días son especiales si estás conmigo.</p>
-                    </div>
-                </div>
+</div>
+</div>
 
-                <div class="flowers-container">
-                    <div class="flower flower--1">
-                        <div class="flower__leafs">
-                            <div class="flower__leaf flower__leaf--1"></div>
-                            <div class="flower__leaf flower__leaf--2"></div>
-                            <div class="flower__leaf flower__leaf--3"></div>
-                            <div class="flower__leaf flower__leaf--4"></div>
-                            <div class="flower__white-circle"></div>
-                        </div>
-                        <div class="flower__line"></div>
-                    </div>
-                    <div class="flower flower--2">
-                        <div class="flower__leafs">
-                            <div class="flower__leaf flower__leaf--1"></div>
-                            <div class="flower__leaf flower__leaf--2"></div>
-                            <div class="flower__leaf flower__leaf--3"></div>
-                            <div class="flower__leaf flower__leaf--4"></div>
-                            <div class="flower__white-circle"></div>
-                        </div>
-                        <div class="flower__line"></div>
-                    </div>
-                    <div class="flower flower--3">
-                        <div class="flower__leafs">
-                            <div class="flower__leaf flower__leaf--1"></div>
-                            <div class="flower__leaf flower__leaf--2"></div>
-                            <div class="flower__leaf flower__leaf--3"></div>
-                            <div class="flower__leaf flower__leaf--4"></div>
-                            <div class="flower__white-circle"></div>
-                        </div>
-                        <div class="flower__line"></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide stat">
-                <div class="content">
-                    <h1 id="daysCounter">0</h1>
-                    <p>Días de conocer a la persona más increíble</p>
-                </div>
-            </section>
-
-            <section class="slide gallery-slide">
-                <div class="content">
-                    <h2>Nuestros recuerdos</h2>
-                    <div class="gallery">
-                        <img src="IMAGENES/f1.jpeg" alt="1"> <img src="IMAGENES/f2.jpeg" alt="2">
-                        <img src="IMAGENES/f3.jpeg" alt="3"> <img src="IMAGENES/f4.jpeg" alt="4">
-                        <img src="IMAGENES/f5.jpeg" alt="5"> <img src="IMAGENES/f6.jpeg" alt="6">
-                        <img src="IMAGENES/f7.jpeg" alt="7"> <img src="IMAGENES/f8.jpeg" alt="8">
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide indie">
-                <div class="content">
-                    <h2>Si esto fuera una canción sería de</h2>
-                    <h1>Kevin Kaarl</h1>
-                    <p>Suave. Sincera. Eterna.</p>
-                </div>
-            </section>
-
-            <section class="slide final-message">
-                <div class="content">
-                    <h1>Me gustas.</h1>
-                    <p>Y no tienes idea de cuánto.</p>
-                </div>
-            </section>
-
-            <section class="slide audio-slide blackout">
-                <div class="content">
-                    <h2>Escucha esto cuando estés lista</h2>
-                    <button id="playAudio" class="reload-btn" style="color: white;">▶ Reproducir Música</button>
-                    <div id="lyrics" class="lyrics"></div>
-                    <audio id="audio" src="IMAGENES/Lenguaje_del_Alma.mp3"></audio>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
