@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Para Ti</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -51,14 +51,30 @@
                     <p>Canciones que me recuerdan a ti</p>
                 </div>
             </div>
+
+            <div class="gift-card" data-target="modalBesos">
+                <div class="card-background" style="background-color: #4a1220;"></div>
+                <div class="card-content">
+                    <h2>Besos 💋</h2>
+                    <p>Uno para cada día</p>
+                </div>
+            </div>
+
+            <div class="gift-card" data-target="modalCartas">
+                <div class="card-background" style="background-color: #1c2b4a;"></div>
+                <div class="card-content">
+                    <h2>100 Cartas ✉️</h2>
+                    <p>Una por cada motivo para quererte</p>
+                </div>
+            </div>
         </div>
     </main>
 
     <div id="modalHistoria" class="modal-overlay">
         <button class="close-modal">&times;</button>
         <div class="scroll-container">
-            
-            <section class="slide intro">
+
+            <section class="slide intro dark">
                 <div class="content fade-up">
                     <h1>Sorpresa Paletita</h1>
                     <p>Desliza hacia abajo para comenzar...</p>
@@ -85,11 +101,35 @@
                 </div>
             </section>
 
-            <section class="slide dark">
+            <section class="slide dark bg-milo">
                 <div class="content fade-up">
                     <h2>Tu vibra sería una canción de</h2>
                     <h1 class="gold-text">Milo J</h1>
-                    <p>Profunda. Real. Diferente.</p>
+                    <p>"El Cariño". Profunda. Real. Diferente.</p>
+                </div>
+            </section>
+
+            <section class="slide constellation-slide">
+                <div class="mini-constellation">
+                    <svg viewBox="0 0 300 260" class="constellation-svg">
+                        <polyline points="150,60 110,20 60,20 20,60 20,110 150,240 280,110 280,60 240,20 190,20 150,60"
+                                  fill="none" stroke="rgba(226,185,115,0.5)" stroke-width="1.5"/>
+                        <circle class="star-point" cx="150" cy="60" r="3"></circle>
+                        <circle class="star-point" cx="110" cy="20" r="2.5" style="animation-delay:.2s"></circle>
+                        <circle class="star-point" cx="60" cy="20" r="3" style="animation-delay:.4s"></circle>
+                        <circle class="star-point" cx="20" cy="60" r="2.5" style="animation-delay:.6s"></circle>
+                        <circle class="star-point" cx="20" cy="110" r="3" style="animation-delay:.8s"></circle>
+                        <circle class="star-point" cx="150" cy="240" r="4" style="animation-delay:1s"></circle>
+                        <circle class="star-point" cx="280" cy="110" r="3" style="animation-delay:1.2s"></circle>
+                        <circle class="star-point" cx="280" cy="60" r="2.5" style="animation-delay:1.4s"></circle>
+                        <circle class="star-point" cx="240" cy="20" r="3" style="animation-delay:1.6s"></circle>
+                        <circle class="star-point" cx="190" cy="20" r="2.5" style="animation-delay:1.8s"></circle>
+                    </svg>
+                </div>
+                <div class="content fade-up">
+                    <h2>Como las estrellas...</h2>
+                    <h1 class="gold-text">Esto estaba escrito</h1>
+                    <p>Y desde ahora, quiero ser parte de tu cielo. ✨</p>
                 </div>
             </section>
 
@@ -141,7 +181,7 @@
                 </div>
             </section>
 
-            <section class="slide gallery-slide">
+            <section class="slide gallery-slide dark">
                 <div class="content fade-up">
                     <h2>Nuestros recuerdos</h2>
                     <div class="gallery">
@@ -206,7 +246,7 @@
 
     <div id="modalFlores" class="modal-overlay warm-bg">
         <button class="close-modal dark-btn">&times;</button>
-        
+
         <div id="petals-container"></div>
 
         <div class="flower-experience">
@@ -219,14 +259,14 @@
                     <div class="p9"></div><div class="p10"></div><div class="p11"></div><div class="p12"></div>
                 </div>
             </div>
-            
-                <div class="static-content flower-message">
+
+            <div class="static-content flower-message">
                 <h1 class="bloom-text">Para ti 🌼</h1>
                 <p id="dynamic-phrase">Porque quiero que te quedes en mi vida por mucho tiempo.</p>
                 <span class="dedicatoria">Hice esto pensando en ti. ✨</span>
-                </div>
             </div>
         </div>
+    </div>
 
     <div id="modalCarta" class="modal-overlay dark-paper">
         <button class="close-modal">&times;</button>
@@ -236,7 +276,7 @@
         </div>
     </div>
 
-    <!-- <div id="modalPlaylist" class="modal-overlay dark-music">
+    <div id="modalPlaylist" class="modal-overlay dark-music">
         <button class="close-modal">&times;</button>
         <div class="static-content fade-up">
             <h1>Nuestras Canciones</h1>
@@ -247,24 +287,63 @@
                         <span class="track-name">Otro Año</span>
                         <span class="track-artist">Indie Folk vibe</span>
                     </div>
+                    <span class="track-note">🎵</span>
                 </li>
                 <li class="track">
                     <div class="track-info">
                         <span class="track-name">Flaquita Mía</span>
                         <span class="track-artist">Para cantártela</span>
                     </div>
+                    <span class="track-note">🎵</span>
                 </li>
-                 <li class="track">
+                <li class="track">
+                    <div class="track-info">
+                        <span class="track-name">El Cariño</span>
+                        <span class="track-artist">Milo J</span>
+                    </div>
+                    <span class="track-note">🎵</span>
+                </li>
+                <li class="track">
                     <div class="track-info">
                         <span class="track-name">San Lucas</span>
                         <span class="track-artist">Kevin Kaarl</span>
                     </div>
+                    <span class="track-note">🎵</span>
                 </li>
             </ul>
         </div>
     </div>
 
-    -->
+    <!-- ===== NUEVO: SECCIÓN DE BESOS ===== -->
+    <div id="modalBesos" class="modal-overlay besos-bg">
+        <button class="close-modal">&times;</button>
+        <div id="kissesContainer" class="kisses-container"></div>
+        <div class="static-content">
+            <h1 class="pink-text glow-text">Un beso para ti 💋</h1>
+            <p class="besos-sub">Toca el botón cada vez que quieras sentir uno mío, aunque estemos lejos.</p>
+            <button id="kissBtn" class="play-btn-large kiss-btn">💋 Mándame un beso</button>
+            <p class="kiss-counter">Besos enviados: <span id="kissCount">0</span></p>
+        </div>
+    </div>
+
+    <!-- ===== NUEVO: SECCIÓN 100 CARTAS ===== -->
+    <div id="modalCartas" class="modal-overlay cartas-bg">
+        <button class="close-modal">&times;</button>
+        <div class="cartas-wrapper">
+            <div class="cartas-intro">
+                <h1 class="gold-text">100 Cartas</h1>
+                <p>Una por cada motivo que tengo para quererte. Toca un sobre y ábrelo.</p>
+            </div>
+
+            <div id="cartasGrid" class="cartas-grid"></div>
+
+            <div id="cartaReader" class="carta-reader">
+                <h3 id="cartaReaderTitulo"></h3>
+                <div id="cartaReaderTexto" class="carta-reader-body"></div>
+                <button id="btnVolverCartas" class="btn-volver">← Volver a las cartas</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
