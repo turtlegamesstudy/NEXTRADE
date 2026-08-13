@@ -4,7 +4,7 @@
     --accent-gold: #e2b973;
     --accent-pink: #d48c9b;
     --accent-red: #8B1E28;
-    
+
     --font-headings: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -13,6 +13,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
@@ -27,41 +32,51 @@ h1, h2, h3 {
     font-weight: 600;
 }
 
+/* --- FONDO DE PARTÍCULAS / CONSTELACIONES --- */
+#canvas-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#particleCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 /* --- GALERÍA PRINCIPAL --- */
 .main-gallery {
-    padding: 4rem 1.5rem; /* Más espacio arriba para que respire */
-    max-width: 900px;    /* Un poco más estrecho se ve más elegante */
+    padding: 4rem 1.5rem;
+    max-width: 900px;
     margin: 0 auto;
     min-height: 100vh;
     position: relative;
-    z-index: 1;         /* Por encima del fondo de estrellas */
+    z-index: 1;
 }
 
 .gallery-header {
     text-align: center;
     margin-bottom: 5rem;
+    position: relative;
 }
 
 .gallery-header h1 {
     font-size: clamp(3rem, 10vw, 4.5rem);
     background: linear-gradient(to bottom, var(--accent-gold), #fff);
-    
-    /* Primero la versión con prefijo para navegadores basados en Webkit */
     -webkit-background-clip: text;
-    /* Luego la versión estándar para máxima compatibilidad */
     background-clip: text;
-    
-    /* Esta propiedad no tiene versión estándar, se queda con el prefijo */
     -webkit-text-fill-color: transparent;
-    
     filter: drop-shadow(0 0 15px rgba(226, 185, 115, 0.3));
     margin-bottom: 0.5rem;
+    animation: glowPulse 3.5s ease-in-out infinite;
 }
 
 .gallery-header p {
     font-family: var(--font-body);
     text-transform: uppercase;
-    letter-spacing: 4px; /* Estilo minimalista profesional */
+    letter-spacing: 4px;
     font-size: 0.8rem;
     opacity: 0.7;
     color: var(--text-light);
@@ -82,17 +97,18 @@ h1, h2, h3 {
 .gift-card {
     position: relative;
     border-radius: 16px;
-    height: 220px; /* Un poco más de altura */
+    height: 220px;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil */
+    border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    
-    /* ESTADO INICIAL (Para que el JS las revele) */
+
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.3s ease;
 }
 
 .gift-card.reveal {
@@ -100,9 +116,10 @@ h1, h2, h3 {
     transform: translateY(0);
 }
 
-.gift-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 140, 155, 0.2);
+.gift-card:hover,
+.gift-card:active {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 15px 40px rgba(212, 140, 155, 0.3);
 }
 
 .card-background {
@@ -111,11 +128,13 @@ h1, h2, h3 {
     background-size: cover;
     background-position: center;
     filter: brightness(0.5);
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.4s ease;
+    transform: scale(1.02);
 }
 
 .gift-card:hover .card-background {
-    filter: brightness(0.7);
+    filter: brightness(0.65);
+    transform: scale(1.08);
 }
 
 .card-content {
@@ -137,10 +156,32 @@ h1, h2, h3 {
     opacity: 0.8;
 }
 
+/* borde brillante recorriendo la tarjeta al pasar el mouse */
+.gift-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(120deg, transparent, rgba(226,185,115,0.6), transparent);
+    background-size: 250% 250%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gift-card:hover::after {
+    opacity: 1;
+    animation: shimmerBorder 2s linear infinite;
+}
+
 /* --- MODALES GENERALES --- */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background-color: var(--bg-dark);
     z-index: 1000;
     opacity: 0;
@@ -154,8 +195,8 @@ h1, h2, h3 {
 }
 
 .close-modal {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
     right: 20px;
     background: rgba(255,255,255,0.1);
     border: none;
@@ -167,16 +208,22 @@ h1, h2, h3 {
     cursor: pointer;
     z-index: 1001;
     backdrop-filter: blur(5px);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.close-modal:hover {
+    background: rgba(255,255,255,0.2);
+    transform: rotate(90deg);
 }
 
 .close-modal.dark-btn {
     color: #333;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.12);
 }
 
 /* --- SCROLL SNAP (Nuestra Historia) --- */
 .scroll-container {
-    height: 100dvh; /* Usa dvh para móviles (evita bug de barra de navegador) */
+    height: 100dvh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
@@ -192,18 +239,91 @@ h1, h2, h3 {
     text-align: center;
     padding: 2rem;
     position: relative;
+    overflow: hidden;
 }
 
-.content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-.content h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--accent-pink); }
-.content p { font-size: 1.1rem; opacity: 0.9; line-height: 1.6; }
-.gold-text { color: var(--accent-gold) !important; }
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+}
+
+.content h1 { font-size: clamp(2.2rem, 8vw, 2.8rem); margin-bottom: 1rem; }
+.content h2 { font-size: clamp(1.5rem, 6vw, 1.9rem); margin-bottom: 1rem; color: var(--accent-pink); }
+.content p { font-size: clamp(1rem, 4vw, 1.1rem); opacity: 0.9; line-height: 1.6; }
+.gold-text {
+    color: var(--accent-gold) !important;
+    text-shadow: 0 0 30px rgba(226, 185, 115, 0.35);
+}
+.pink-text {
+    color: var(--accent-pink) !important;
+    text-shadow: 0 0 30px rgba(212, 140, 155, 0.35);
+}
 
 .scroll-indicator {
     margin-top: 2rem;
     font-size: 2rem;
     animation: bounce 2s infinite;
     opacity: 0.6;
+}
+
+/* --- AMBIENTES POR ESCENA (mood de la historia) --- */
+.slide.dark {
+    background: radial-gradient(circle at 50% 15%, #1c1c22 0%, var(--bg-dark) 65%);
+}
+
+.slide.bg-milo {
+    background: radial-gradient(circle at 50% 30%, #241733 0%, var(--bg-dark) 70%);
+}
+
+.slide.soft {
+    background: linear-gradient(160deg, #2a1f2e 0%, #17121a 100%);
+}
+
+.slide.flowers {
+    background: linear-gradient(160deg, #2e2013 0%, #17121a 100%);
+}
+
+.slide.indie {
+    background: radial-gradient(circle at 50% 25%, #102a2b 0%, var(--bg-dark) 70%);
+}
+
+.slide.stat {
+    background: radial-gradient(circle at 50% 50%, rgba(226,185,115,0.1) 0%, var(--bg-dark) 65%);
+}
+
+.slide.stat .content h1 {
+    font-size: clamp(2.6rem, 14vw, 4.5rem);
+}
+
+.slide.audio-slide {
+    background: radial-gradient(circle at 50% 80%, rgba(212,140,155,0.15) 0%, var(--bg-dark) 65%);
+}
+
+.slide.final-message {
+    background: radial-gradient(circle at 50% 50%, rgba(139,30,40,0.3) 0%, var(--bg-dark) 70%);
+}
+
+/* --- SLIDE DE CONSTELACIÓN --- */
+.slide.constellation-slide {
+    background: radial-gradient(circle at 50% 30%, #10142b 0%, var(--bg-dark) 75%);
+}
+
+.mini-constellation {
+    width: min(70vw, 260px);
+    margin: 0 auto 1.5rem;
+}
+
+.constellation-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.star-point {
+    fill: #fff;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(226,185,115,0.6));
+    animation: twinkleStar 2.2s ease-in-out infinite;
 }
 
 /* --- FLORES AMARILLAS --- */
@@ -213,7 +333,7 @@ h1, h2, h3 {
 }
 #petals-container {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    inset: 0;
     overflow: hidden;
     pointer-events: none;
 }
@@ -231,6 +351,7 @@ h1, h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1.5rem;
 }
 .letter-container {
     background: #2a2226;
@@ -265,6 +386,9 @@ h1, h2, h3 {
 /* --- PLAYLIST --- */
 .dark-music {
     background: linear-gradient(to bottom, #0f0f11, #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .static-content {
     height: 100dvh;
@@ -290,6 +414,10 @@ h1, h2, h3 {
     padding: 1rem 1.5rem;
     border-radius: 12px;
     backdrop-filter: blur(5px);
+    transition: background 0.2s ease;
+}
+.track:hover {
+    background: rgba(255,255,255,0.09);
 }
 .track-info {
     text-align: left;
@@ -298,17 +426,164 @@ h1, h2, h3 {
 }
 .track-name { font-weight: 600; color: white; font-size: 1.1rem;}
 .track-artist { font-size: 0.8rem; color: var(--accent-pink); margin-top: 4px;}
-.play-btn {
-    background: var(--accent-gold);
-    color: black;
-    border: none;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    font-size: 1rem;
-    cursor: pointer;
+.track-note {
+    font-size: 1.3rem;
+}
+
+/* --- SECCIÓN DE BESOS --- */
+.besos-bg {
+    background: radial-gradient(circle at 50% 20%, #4a1220 0%, #17070c 70%);
+    overflow: hidden;
+}
+
+.kisses-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.kiss-float {
+    position: absolute;
+    bottom: -10vh;
+    animation: kissRise linear forwards;
+    filter: drop-shadow(0 0 6px rgba(212,140,155,0.5));
+}
+
+.besos-sub {
+    max-width: 380px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.85;
+}
+
+.kiss-btn {
+    font-size: 1.1rem;
+    box-shadow: 0 0 25px rgba(212,140,155,0.4);
+}
+
+.kiss-btn:active {
+    transform: scale(0.95);
+}
+
+.kiss-counter {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.kiss-burst {
+    position: fixed;
+    z-index: 2000;
+    font-size: 1.4rem;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: kissBurst 0.9s ease-out forwards;
+}
+
+/* --- SECCIÓN 100 CARTAS --- */
+.cartas-bg {
+    background: radial-gradient(circle at 50% 15%, #1c2b4a 0%, var(--bg-dark) 70%);
+}
+
+.cartas-wrapper {
+    height: 100dvh;
+    overflow-y: auto;
+    padding: 6rem 1.5rem 3rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+}
+
+.cartas-intro {
+    max-width: 420px;
+    margin-bottom: 2rem;
+}
+
+.cartas-intro p {
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+.cartas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 560px;
+}
+
+.cartas-grid.hidden {
+    display: none;
+}
+
+.envelope-btn {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 1px solid rgba(226,185,115,0.25);
+    background: rgba(255,255,255,0.04);
+    color: var(--accent-gold);
+    font-family: var(--font-headings);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.envelope-btn:hover,
+.envelope-btn:active {
+    background: rgba(226,185,115,0.15);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(226,185,115,0.2);
+}
+
+.carta-reader {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
+}
+
+.carta-reader.active {
+    display: block;
+}
+
+.carta-reader h3 {
+    color: var(--accent-pink);
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+.carta-reader-body {
+    font-family: var(--font-headings);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    min-height: 180px;
+}
+
+.btn-volver {
+    display: block;
+    margin: 1.5rem auto 0;
+    background: transparent;
+    border: 1px solid rgba(226,185,115,0.4);
+    color: var(--accent-gold);
+    padding: 0.7rem 1.6rem;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-volver:hover {
+    background: rgba(226,185,115,0.1);
 }
 
 /* --- ANIMACIONES --- */
@@ -326,16 +601,35 @@ h1, h2, h3 {
     0% { transform: translateY(-10vh) rotate(0deg) scale(1); opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg) scale(0.5); opacity: 0; }
 }
+@keyframes glowPulse {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(226, 185, 115, 0.3)); }
+    50% { filter: drop-shadow(0 0 30px rgba(226, 185, 115, 0.6)); }
+}
+@keyframes shimmerBorder {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 250% 50%; }
+}
+@keyframes twinkleStar {
+    0%, 100% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes kissRise {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(15deg); opacity: 0; }
+}
+@keyframes kissBurst {
+    0% { transform: translate(-50%, -50%) translate(0, 0) scale(0.6); opacity: 1; }
+    100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.1); opacity: 0; }
+}
 
 .fade-up { animation: fadeUp 1s ease forwards; }
 
-
-/* --- ESTILOS DE TU HISTORIA ORIGINAL --- */
-
-/* Slides con fotos de fondo completo */
+/* --- HISTORIA: fotos y galería --- */
 .photo-slide {
     padding: 0;
-    justify-content: flex-end; /* Texto abajo */
+    justify-content: flex-end;
 }
 
 .photo-slide img {
@@ -343,7 +637,7 @@ h1, h2, h3 {
     top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: brightness(0.6); /* Oscurece un poco la foto para leer el texto */
+    filter: brightness(0.55);
     z-index: 1;
 }
 
@@ -351,12 +645,12 @@ h1, h2, h3 {
     position: relative;
     z-index: 2;
     margin-bottom: 15%;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
     color: white;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    padding: 0 1rem;
 }
 
-/* Galería de fotos (Grid 2x4) */
 .gallery-slide .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -374,16 +668,11 @@ h1, h2, h3 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* Pausa dramática */
 .blackout {
     background-color: #000;
     color: white;
 }
 
-/* Utilidades de texto */
-.pink-text { color: var(--accent-pink) !important; }
-
-/* Botón de audio final */
 .play-btn-large {
     background-color: var(--accent-pink);
     color: white;
@@ -409,27 +698,37 @@ h1, h2, h3 {
     color: #e0e0e0;
 }
 
-
-/* --- DISEÑO DEL GIRASOL --- */
+/* --- GIRASOL --- */
 .flower-experience {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    z-index: 2;
+    position: relative;
+    padding: 2rem;
 }
 
 .sunflower {
     position: relative;
     width: 200px;
     height: 200px;
-    transform: scale(0); /* Empieza invisible */
+    transform: scale(0);
     transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: floating 3s ease-in-out infinite;
+    transform-origin: bottom center;
+    margin-bottom: 2rem;
 }
 
-/* Activa la animación cuando el modal está activo */
 .modal-overlay.active .sunflower {
-    transform: scale(1.2);
+    transform: scale(1);
+}
+
+@media (min-width: 480px) {
+    .modal-overlay.active .sunflower {
+        transform: scale(1.2);
+    }
 }
 
 .sunflower .center {
@@ -468,7 +767,6 @@ h1, h2, h3 {
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
 }
 
-/* Posicionamiento circular de pétalos */
 .p1 { transform: translate(-50%, -100%) rotate(0deg); }
 .p2 { transform: translate(-50%, -100%) rotate(30deg); }
 .p3 { transform: translate(-50%, -100%) rotate(60deg); }
@@ -482,10 +780,27 @@ h1, h2, h3 {
 .p11 { transform: translate(-50%, -100%) rotate(300deg); }
 .p12 { transform: translate(-50%, -100%) rotate(330deg); }
 
-/* Estilo del texto */
 .flower-message {
-    margin-top: 40px;
+    margin-top: 20px;
     color: #4a3b00;
+    text-align: center;
+    max-width: 340px;
+}
+
+.bloom-text {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    color: #856404;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+#dynamic-phrase {
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    font-weight: 600;
+    color: #4a3b00;
+    min-height: 3rem;
+    transition: opacity 0.8s ease;
+    font-style: italic;
 }
 
 .dedicatoria {
@@ -493,10 +808,10 @@ h1, h2, h3 {
     margin-top: 15px;
     font-style: italic;
     font-family: var(--font-headings);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 1s ease 1s; /* Aparece después de la flor */
+    transition: all 1s ease 1s;
 }
 
 .modal-overlay.active .dedicatoria {
@@ -509,54 +824,11 @@ h1, h2, h3 {
     to { transform: rotate(360deg); }
 }
 
-
-/* --- MEJORAS DINÁMICAS FLORES --- */
-
-.flower-experience {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    z-index: 2;
-    position: relative;
-}
-
-/* Animación para que el girasol "viva" */
-.sunflower {
-    animation: floating 3s ease-in-out infinite;
-    transform-origin: bottom center;
-    margin-bottom: 2rem;
-}
-
 @keyframes floating {
     0%, 100% { transform: translateY(0) rotate(-2deg); }
     50% { transform: translateY(-15px) rotate(2deg); }
 }
 
-/* Estilo para las frases que van a cambiar */
-.flower-message {
-    text-align: center;
-    max-width: 80%;
-}
-
-.bloom-text {
-    font-size: 2.5rem;
-    color: #856404;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 15px rgba(255,255,255,0.8);
-}
-
-#dynamic-phrase {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #4a3b00;
-    min-height: 3rem;
-    transition: opacity 0.8s ease;
-    font-style: italic;
-}
-
-/* Partículas de brillo (Sparkles) */
 .sparkle {
     position: absolute;
     background: white;
@@ -566,7 +838,11 @@ h1, h2, h3 {
     animation: fall linear forwards;
 }
 
-/* Ajuste de los pétalos para que se vean más naturales */
-.petal {
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+/* --- responsive extra --- */
+@media (max-width: 480px) {
+    .main-gallery { padding: 3rem 1.2rem; }
+    .gallery-header { margin-bottom: 3rem; }
+    .letter-container { padding: 2.2rem 1.5rem; }
+    .close-modal { width: 40px; height: 40px; font-size: 1.7rem; }
+    .cartas-grid { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); }
 }
